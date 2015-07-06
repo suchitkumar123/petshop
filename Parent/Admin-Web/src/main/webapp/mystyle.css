@@ -1,0 +1,69 @@
+@CHARSET "ISO-8859-1";
+<style>
+#header {
+    height:300px;
+    padding:5px;
+}
+#top {
+	height:60px;
+}
+#body {
+	background-color:#eeeeee;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:20%;
+    float:left;
+    padding:5px; 
+    border-style: solid;
+}
+#nav2 {
+	height:100px;
+	width:800px;
+	background-color:#eeeeee;
+}
+
+#new-themes {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  background-color:blue;
+}
+
+#new-themes a {
+  background: url("/deck/wp-content/themes/tbd/images/ribbon-themes-red.png") no-repeat;
+  display: block;
+  height: 140px;
+  width: 140px;
+  text-indent: -9000px;
+  background-color:red;
+}
+
+#tabView {
+	height:100px;
+	width:800px;
+}
+
+#section {
+    width:55%;
+    height:1000px;
+    float:left;
+    padding:10px; 
+}
+#section2 {
+    width:300px;
+    height:1000px;
+    padding:10px;
+    background-color:grey; 
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+}
+</style>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://richfaces.org/a4j">
+<h:head>
+	<title>Admin Home Console</title>
+</h:head>
+<h:body>
+	<div id="top"
+		style="background-color: #A9F5F2; border-style: double; width: 100%;">
+		<div style="float: left;">
+			<p:spacer width="20px"></p:spacer>
+			<h:outputText value="WELCOME #{productControl.currentUser}" />
+			<p:spacer width="20px"></p:spacer>
+			<p:clock />
+		</div>
+		<div style="float: right;">
+			<h:form id="navigation">
+				<p:commandLink value="CATEGORY"
+					action="#{memberController.goToCategory1}" />
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="PRODUCT"
+					action="#{memberController.goToProduct1}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="ORDERS"
+					action="#{memberController.goToOrders}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="LOGOUT" action="#{memberController.goLogout}" />
+				<p:spacer width="20px"></p:spacer>
+			</h:form>
+		</div>
+	</div>
+	<h:form>
+		<p:dataTable var="user" value="#{memberController.userList}" id="userTable">
+			<p:column headerText="FirstName">
+				<h:outputText value="#{user.firstName}" />
+			</p:column>
+
+			<p:column headerText="LastName">
+				<h:outputText value="#{user.lastName}" />
+			</p:column>
+
+			<p:column headerText="PhoneNumber">
+				<h:outputText value="#{user.phoneNumber}" />
+			</p:column>
+
+			<p:column headerText="Email">
+				<h:outputText value="#{user.email}" />
+			</p:column>
+
+			<p:column>
+				<p:commandButton icon="ui-icon-trash" title="Remove"
+					actionListener="#{memberController.remove(user)}"
+					update="userTable" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

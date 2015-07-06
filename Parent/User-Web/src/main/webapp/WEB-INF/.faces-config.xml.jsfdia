@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#userHome.xhtml" PATH="/userHome.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#userHome.xhtml:0" NAME="item"
+   PATH="/userHome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="logout:#{customerController.goLogout}:index.xhtml" NAME="output"
+    PATH="index.xhtml" TARGET="rules:index.xhtml"
+    TITLE="#{customerController.goLogout}:logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#userHome.xhtml:1" NAME="item1"
+   PATH="/userHome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="page:#{customerController.goToRegistration()}:userRegistration.xhtml"
+    NAME="output" PATH="userRegistration.xhtml"
+    TARGET="rules:userRegistration.xhtml"
+    TITLE="#{customerController.goToRegistration()}:page" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="page:#{customerController.goLogout}:adminProduct.xhtml"
+    NAME="output2" PATH="adminProduct.xhtml"
+    TARGET="rules:adminProduct.xhtml"
+    TITLE="#{customerController.goLogout}:page" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#userHome.xhtml:2" NAME="item2"
+   PATH="/userHome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="view:#{customerProduct.goToViewProduct}:viewProduct.xhtml"
+    NAME="output" PATH="viewProduct.xhtml"
+    TARGET="rules:viewProduct.xhtml"
+    TITLE="#{customerProduct.goToViewProduct}:view" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
+   PATH="/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="user::#test.xhtml" NAME="output"
+    PATH="/test.xhtml" TARGET="rules:#test.xhtml" TITLE="user" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="notuser::#index.xhtml" NAME="output1"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="notuser" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="page:#{customerController.goToRegistration()}:#userRegistration.xhtml"
+    NAME="output2" PATH="/userRegistration.xhtml"
+    TARGET="rules:#userRegistration.xhtml"
+    TITLE="#{customerController.goToRegistration()}:page" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="petShopHome::#petShopHome.xhtml"
+    NAME="output3" PATH="/petShopHome.xhtml"
+    TARGET="rules:#petShopHome.xhtml" TITLE="petShopHome" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:index.xhtml" PATH="index.xhtml"
+  SHAPE="448,17,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#userRegistration.xhtml"
+  PATH="/userRegistration.xhtml" SHAPE="288,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#userRegistration.xhtml:0" NAME="item"
+   PATH="/userRegistration.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#index.xhtml" NAME="output"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="petShopHome::#petShopHome.xhtml"
+    NAME="output1" PATH="/petShopHome.xhtml"
+    TARGET="rules:#petShopHome.xhtml" TITLE="petShopHome" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#userRegistration.xhtml:1" NAME="item1"
+   PATH="/userRegistration.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{registration.customerRegister}:userLoginsRegistration.xhtml"
+    NAME="output" PATH="userLoginsRegistration.xhtml"
+    TARGET="rules:userLoginsRegistration.xhtml"
+    TITLE="#{registration.customerRegister}:success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#userLoginsRegistration.xhtml"
+  PATH="/userLoginsRegistration.xhtml" SHAPE="288,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#userLoginsRegistration.xhtml:0" NAME="item"
+   PATH="/userLoginsRegistration.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#index.xhtml" NAME="output"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="petShopHome::#petShopHome.xhtml"
+    NAME="output1" PATH="/petShopHome.xhtml"
+    TARGET="rules:#petShopHome.xhtml" TITLE="petShopHome" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#userLoginsRegistration.xhtml:1" NAME="item1"
+   PATH="/userLoginsRegistration.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="done:#{registration.addLogins}:index.xhtml"
+    NAME="output" PATH="index.xhtml" TARGET="rules:index.xhtml"
+    TITLE="#{registration.addLogins}:done" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:adminProduct.xhtml" PATH="adminProduct.xhtml"
+  SHAPE="544,561,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:userRegistration.xhtml"
+  PATH="userRegistration.xhtml" SHAPE="544,337,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:userLoginsRegistration.xhtml"
+  PATH="userLoginsRegistration.xhtml" SHAPE="544,225,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:viewProduct.xhtml" PATH="viewProduct.xhtml"
+  SHAPE="560,257,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#test.xhtml" PATH="/test.xhtml"
+  SHAPE="288,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#test.xhtml:0" NAME="item" PATH="/test.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="cart::#shoppingcart.xhtml" NAME="output"
+    PATH="/shoppingcart.xhtml" TARGET="rules:#shoppingcart.xhtml"
+    TITLE="cart" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="profile::#viewProfile.xhtml" NAME="output1"
+    PATH="/viewProfile.xhtml" TARGET="rules:#viewProfile.xhtml"
+    TITLE="profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="history::#viewHistory.xhtml" NAME="output2"
+    PATH="/viewHistory.xhtml" TARGET="rules:#viewHistory.xhtml"
+    TITLE="history" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::#index.xhtml" NAME="output3"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#shoppingcart.xhtml"
+  PATH="/shoppingcart.xhtml" SHAPE="560,257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#shoppingcart.xhtml:0" NAME="item"
+   PATH="/shoppingcart.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="cart::#shoppingcart.xhtml" NAME="output"
+    PATH="/shoppingcart.xhtml" TARGET="rules:#shoppingcart.xhtml"
+    TITLE="cart" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="profile::#viewProfile.xhtml" NAME="output1"
+    PATH="/viewProfile.xhtml" TARGET="rules:#viewProfile.xhtml"
+    TITLE="profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="history::#viewHistory.xhtml" NAME="output2"
+    PATH="/viewHistory.xhtml" TARGET="rules:#viewHistory.xhtml"
+    TITLE="history" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::#index.xhtml" NAME="output3"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#viewProfile.xhtml" PATH="/viewProfile.xhtml"
+  SHAPE="560,257,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#viewHistory.xhtml" PATH="/viewHistory.xhtml"
+  SHAPE="560,881,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#report.xhtml" PATH="/report.xhtml"
+  SHAPE="336,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#report.xhtml:0" NAME="item"
+   PATH="/report.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="cart::#shoppingcart.xhtml" NAME="output"
+    PATH="/shoppingcart.xhtml" TARGET="rules:#shoppingcart.xhtml"
+    TITLE="cart" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="profile::#viewProfile.xhtml" NAME="output1"
+    PATH="/viewProfile.xhtml" TARGET="rules:#viewProfile.xhtml"
+    TITLE="profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="history::#viewHistory.xhtml" NAME="output2"
+    PATH="/viewHistory.xhtml" TARGET="rules:#viewHistory.xhtml"
+    TITLE="history" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::#index.xhtml" NAME="output3"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="home::#test.xhtml" NAME="output4"
+    PATH="/test.xhtml" TARGET="rules:#test.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#profile.xhtml" PATH="/profile.xhtml"
+  SHAPE="352,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#profile.xhtml:0" NAME="item"
+   PATH="/profile.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="cart::#shoppingcart.xhtml" NAME="output"
+    PATH="/shoppingcart.xhtml" TARGET="rules:#shoppingcart.xhtml"
+    TITLE="cart" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="profile::#viewProfile.xhtml" NAME="output1"
+    PATH="/viewProfile.xhtml" TARGET="rules:#viewProfile.xhtml"
+    TITLE="profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="history::#viewHistory.xhtml" NAME="output2"
+    PATH="/viewHistory.xhtml" TARGET="rules:#viewHistory.xhtml"
+    TITLE="history" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::#index.xhtml" NAME="output3"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#history.xhtml" PATH="/history.xhtml"
+  SHAPE="352,1137,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#history.xhtml:0" NAME="item"
+   PATH="/history.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="cart::#shoppingcart.xhtml" NAME="output"
+    PATH="/shoppingcart.xhtml" TARGET="rules:#shoppingcart.xhtml"
+    TITLE="cart" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="profile::#viewProfile.xhtml" NAME="output1"
+    PATH="/viewProfile.xhtml" TARGET="rules:#viewProfile.xhtml"
+    TITLE="profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="history::#viewHistory.xhtml" NAME="output2"
+    PATH="/viewHistory.xhtml" TARGET="rules:#viewHistory.xhtml"
+    TITLE="history" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::#index.xhtml" NAME="output3"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#petShopHome.xhtml" PATH="/petShopHome.xhtml"
+  SHAPE="96,913,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#petShopHome.xhtml:0" NAME="item"
+   PATH="/petShopHome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="register::#userRegistration.xhtml"
+    NAME="output" PATH="/userRegistration.xhtml"
+    TARGET="rules:#userRegistration.xhtml" TITLE="register" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#index.xhtml" NAME="output1"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

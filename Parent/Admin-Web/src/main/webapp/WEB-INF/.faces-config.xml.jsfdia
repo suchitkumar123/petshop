@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
+   PATH="/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="admin::#adminHome.xhtml" NAME="output"
+    PATH="/adminHome.xhtml" TARGET="rules:#adminHome.xhtml"
+    TITLE="admin" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#adminHome.xhtml" PATH="/adminHome.xhtml"
+  SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#adminHome.xhtml:0" NAME="item"
+   PATH="/adminHome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="logout:#{memberController.goLogout}:login.xhtml" NAME="output"
+    PATH="login.xhtml" TARGET="rules:login.xhtml"
+    TITLE="#{memberController.goLogout}:logout" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="page:#{memberController.goToCategory}:adminCategory.xhtml"
+    NAME="output1" PATH="adminCategory.xhtml"
+    TARGET="rules:adminCategory.xhtml"
+    TITLE="#{memberController.goToCategory}:page" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="page:#{memberController.goToProduct}:adminProduct.xhtml"
+    NAME="output2" PATH="adminProduct.xhtml"
+    TARGET="rules:adminProduct.xhtml"
+    TITLE="#{memberController.goToProduct}:page" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="users::viewUsers.xhtml" NAME="output3"
+    PATH="viewUsers.xhtml" TARGET="rules:viewUsers.xhtml" TITLE="users" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="orders::viewOrders.xhtml" NAME="output4"
+    PATH="viewOrders.xhtml" TARGET="rules:viewOrders.xhtml"
+    TITLE="orders" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:adminCategory.xhtml"
+  PATH="adminCategory.xhtml" SHAPE="272,145,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:adminProduct.xhtml" PATH="adminProduct.xhtml"
+  SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#adminCategory.xhtml"
+  PATH="/adminCategory.xhtml" SHAPE="32,305,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#adminCategory.xhtml:0" NAME="item"
+   PATH="/adminCategory.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="orders::#viewOrders.xhtml" NAME="output"
+    PATH="/viewOrders.xhtml" TARGET="rules:#viewOrders.xhtml"
+    TITLE="orders" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="users::#viewUsers.xhtml" NAME="output1"
+    PATH="/viewUsers.xhtml" TARGET="rules:#viewUsers.xhtml"
+    TITLE="users" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::login.xhtml" NAME="output2"
+    PATH="login.xhtml" TARGET="rules:login.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="product::adminProduct.xhtml" NAME="output3"
+    PATH="adminProduct.xhtml" TARGET="rules:adminProduct.xhtml"
+    TITLE="product" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:login.xhtml" PATH="login.xhtml"
+  SHAPE="272,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#adminProduct.xhtml"
+  PATH="/adminProduct.xhtml" SHAPE="32,481,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#adminProduct.xhtml:0" NAME="item"
+   PATH="/adminProduct.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="orders::#viewOrders.xhtml" NAME="output"
+    PATH="/viewOrders.xhtml" TARGET="rules:#viewOrders.xhtml"
+    TITLE="orders" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="users::#viewUsers.xhtml" NAME="output1"
+    PATH="/viewUsers.xhtml" TARGET="rules:#viewUsers.xhtml"
+    TITLE="users" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::login.xhtml" NAME="output2"
+    PATH="login.xhtml" TARGET="rules:login.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="category::adminCategory.xhtml"
+    NAME="output3" PATH="adminCategory.xhtml"
+    TARGET="rules:adminCategory.xhtml" TITLE="category" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:viewOrders.xhtml" PATH="viewOrders.xhtml"
+  SHAPE="304,673,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:viewUsers.xhtml" PATH="viewUsers.xhtml"
+  SHAPE="304,561,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#viewUsers.xhtml" PATH="/viewUsers.xhtml"
+  SHAPE="48,545,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#viewUsers.xhtml:0" NAME="item"
+   PATH="/viewUsers.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="product::#adminProduct.xhtml" NAME="output"
+    PATH="/adminProduct.xhtml" TARGET="rules:#adminProduct.xhtml"
+    TITLE="product" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="category::adminCategory.xhtml"
+    NAME="output1" PATH="adminCategory.xhtml"
+    TARGET="rules:adminCategory.xhtml" TITLE="category" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::login.xhtml" NAME="output2"
+    PATH="login.xhtml" TARGET="rules:login.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="home::adminHome.xhtml" NAME="output3"
+    PATH="adminHome.xhtml" TARGET="rules:adminHome.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="orders::viewOrders.xhtml" NAME="output4"
+    PATH="viewOrders.xhtml" TARGET="rules:viewOrders.xhtml"
+    TITLE="orders" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:adminHome.xhtml" PATH="adminHome.xhtml"
+  SHAPE="304,673,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#viewOrders.xhtml" PATH="/viewOrders.xhtml"
+  SHAPE="48,977,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#viewOrders.xhtml:0" NAME="item"
+   PATH="/viewOrders.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="product::#adminProduct.xhtml" NAME="output"
+    PATH="/adminProduct.xhtml" TARGET="rules:#adminProduct.xhtml"
+    TITLE="product" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="category::adminCategory.xhtml"
+    NAME="output1" PATH="adminCategory.xhtml"
+    TARGET="rules:adminCategory.xhtml" TITLE="category" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::login.xhtml" NAME="output2"
+    PATH="login.xhtml" TARGET="rules:login.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="home::adminHome.xhtml" NAME="output3"
+    PATH="adminHome.xhtml" TARGET="rules:adminHome.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="users::viewUsers.xhtml" NAME="output4"
+    PATH="viewUsers.xhtml" TARGET="rules:viewUsers.xhtml" TITLE="users" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://richfaces.org/a4j">
+<h:head>
+	<script type="text/javascript">
+		function handleDrop(event, ui) {
+			var droppedCar = ui.draggable;
+
+			droppedCar.fadeOut('fast');
+		}
+	</script>
+	<style>
+p.uppercase {
+	text-transform: uppercase;
+}
+
+p.italic {
+	font-style: italic;
+}
+</style>
+	<title>Petshop Online</title>
+	<link rel="stylesheet" type="text/css" href="mystyle.css"></link>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body style="background-color: #E6E6E6;">
+	<div id="top"
+		style="background-color: #A9F5F2; border-style: double; width: 100%;">
+		<div style="float: left;">
+			<p:spacer width="20px"></p:spacer>
+			<h:outputText value="WELCOME #{dndProductsView.user}" />
+			<p:spacer width="20px"></p:spacer>
+			<p:clock />
+		</div>
+		<div style="float: right;">
+		<h:form id="navigation">
+			<p:commandLink value="PROFILE"
+				action="#{dndProductsView.viewProfile()}" />
+			<p:spacer width="20px"></p:spacer>
+			<p:commandLink value="HISTORY"
+				action="#{dndProductsView.ordersHistory()}"></p:commandLink>
+			<p:spacer width="20px"></p:spacer>
+			<p:commandLink value="LOGOUT" action="#{dndProductsView.logout()}" />
+			<p:spacer width="20px"></p:spacer>
+		</h:form>	
+		</div>
+	</div>
+	<div id="nav">
+		<h2>
+			<font
+				style="text-transform: capitalize; font-family: Calibri, sans-serif;">CATEGORIES</font>
+		</h2>
+		<h:form id="one">
+			<p:dataTable value="#{dndProductsView.categorylist}" var="category">
+				<p:column>
+					<p class="uppercase">
+						<h:commandLink value="#{category.categoryName}"
+							action="#{dndProductsView.onLinkClick(category.categoryName)}">
+						</h:commandLink>
+					</p>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<br />
+	</div>
+	<div id="section">
+		<h:form id="productForm">
+			<p:growl id="messages" showDetail="true" />
+			<p:fieldset id="availableProductsField" legend="AvailableProducts">
+				<p:dataGrid id="availableProducts" var="product"
+					value="#{dndProductsView.productList}" columns="3" rows="4"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="2,4,6,8">
+					<p:panel id="pnl" header="Hold Here !!" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<p:graphicImage library="images" name="#{product.productName}.jpg" />
+							<h:outputText value="#{product.productName}" />
+							<p:commandButton update=":productForm:display"
+								oncomplete="PF('productDialog').show()" icon="ui-icon-search">
+								<f:setPropertyActionListener value="#{product}"
+									target="#{dndProductsView.selectedProduct}" />
+							</p:commandButton>
+						</h:panelGrid>
+					</p:panel>
+
+					<p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar"
+						stack=".ui-panel" />
+				</p:dataGrid>
+			</p:fieldset>
+
+			<p:dialog header="Product Detail" widgetVar="productDialog"
+				resizable="false" draggable="false" showEffect="fade"
+				hideEffect="fade" modal="true">
+
+				<p:outputPanel id="display">
+					<h:panelGrid columns="2" cellpadding="5"
+						rendered="#{not empty dndProductsView.selectedProduct}">
+						<f:facet name="header">
+							<p:graphicImage library="images" name="#{product.productName}.jpg" />
+						</f:facet>
+
+						<h:outputText value="Id" />
+						<h:outputText value="#{dndProductsView.selectedProduct.productId}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Name:" />
+						<h:outputText
+							value="#{dndProductsView.selectedProduct.productName}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Desc" />
+						<h:outputText
+							value="#{dndProductsView.selectedProduct.productDesc}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Price:" />
+						<h:outputText value="#{dndProductsView.selectedProduct.price}"
+							style="font-weight:bold" />
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+	</div>
+	<div style="height: 150px;">
+		<h2>
+			<p class="italic">Drop the items in this shopping cart!!</p>
+		</h2>
+	</div>
+	<div>
+		<p:fieldset id="selectedProducts"
+			style="height:200px;width:200px;background-color:#eeeeee;">
+			<p:outputPanel id="dropArea"
+				style="height:200px;width:200px;background-color:#eeeeee;">
+				<p:graphicImage library="images" name="cart.png"></p:graphicImage>
+			</p:outputPanel>
+		</p:fieldset>
+
+		<p:droppable for="selectedProducts" tolerance="touch"
+			activeStyleClass="ui-state-highlight"
+			datasource=":productForm:availableProducts" onDrop="handleDrop">
+			<p:ajax listener="#{dndProductsView.onProductDrop}"
+				update="dropArea :productForm:availableProducts" />
+		</p:droppable>
+	</div>
+	<div>
+		<h:form id="chkout">
+			<p:commandButton action="#{dndProductsView.addToCart}"
+				value="Go to the Counter!">
+				<p:confirm header="Confirmation" message="Are you sure?"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
+	</div>
+
+	<div id="footer" style="color: black;">Copyright © Capgemini</div>
+</h:body>
+</html>

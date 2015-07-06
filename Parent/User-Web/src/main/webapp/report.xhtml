@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://richfaces.org/a4j">
+<h:head>
+	<title>Petshop Online</title>
+	<link rel="stylesheet" type="text/css" href="mystyle.css"></link>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body style="background-color: #EEEEEE;">
+	<div id="top"
+		style="background-color: #A9F5F2; border-style: double; width: 100%;">
+		<div style="float: left;">
+			<p:spacer width="20px"></p:spacer>
+			<h:outputText value="WELCOME #{dndProductsView.user}" />
+			<p:spacer width="20px"></p:spacer>
+			<p:clock />
+		</div>
+		<div style="float: right;">
+			<h:form id="navigation">
+				<p:commandLink value="PROFILE"
+					action="#{dndProductsView.viewProfile()}" />
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="HISTORY"
+					action="#{dndProductsView.ordersHistory()}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="LOGOUT" action="#{dndProductsView.logout()}" />
+				<p:spacer width="20px"></p:spacer>
+			</h:form>
+		</div>
+	</div>
+	<div id="nav"></div>
+	<div id="section">
+		<hr></hr>
+		<h2>Your order is Successfully Placed!</h2>
+		<hr />
+		<h:outputText value="Order No: #{dndProductsView.orderId}" />
+		<hr />
+		<h:outputText value="Order Date: #{dndProductsView.order.orderDate}" />
+		<hr />
+		<p:dataTable var="i" value="#{dndProductsView.cartItems}">
+			<p:column headerText="Name">
+				<h:outputText value="#{i.name}" />
+			</p:column>
+
+		</p:dataTable>
+		<hr></hr>
+					<h:form id="navigation1">
+				<p:commandLink value="HOME"
+					action="#{dndProductsView.goHome()}" />
+		</h:form>
+	</div>
+
+	<div id="footer" style="color: black;">Copyright © Capgemini</div>
+</h:body>
+</html>

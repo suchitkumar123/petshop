@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Petshop Online</title>
+	<link rel="stylesheet" type="text/css" href="mystyle.css"></link>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body>
+	<div id="header">
+		<h3>
+			<b>USER CONSOLE</b>
+		</h3>
+	</div>
+	<div id="nav">
+		<h:form id="form1">
+			<h:commandLink action="#{customerController.goToRegistration()}"
+				value="New User Registration">
+			</h:commandLink>
+			<br />
+			<h:commandLink action="#{customerController.goToPetshopHome()}"
+				value="Petshop Home">
+			</h:commandLink>
+			<br />
+			<p>Welcome #{customerProduct.username}</p>
+			<h:commandLink action="#{customerController.goLogout}" value="Logout"></h:commandLink>
+		</h:form>
+		<br />
+	</div>
+	<div id="section">
+		<h:form id="formtab">
+			<p:growl id="msgs" showDetail="true" />
+			<p:tabView dynamic="true" cache="true"
+				value="#{customerProduct.categoryList}" var="category"
+				effectDuration="slow">
+				<p:ajax event="tabChange" listener="#{customerProduct.onTabChange}" update=":formtab:msgs">
+					<f:setPropertyActionListener target="#{customerProduct.temproryCatId}" value="#{category}"></f:setPropertyActionListener>
+				</p:ajax>
+        <p:ajax event="tabClose" listener="#{customerProduct.onTabClose}" />
+				<p:tab title="#{category.categoryName}">
+					<!--	<p:dialog header="Product Info" widgetVar="productDialog" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="productDetail" style="text-align:center;">
+							<p:panelGrid columns="2"
+								rendered="#{not empty customerProduct.selectedViewProduct}"
+								columnClasses="label,value">
+								<f:facet name="header">
+									<p:graphicImage
+										name="images/user.gif" />
+								</f:facet>
+
+								<h:outputText value="Id:" />
+								<h:outputText value="#{customerProduct.selectedViewProduct.productId}" />
+
+								<h:outputText value="Name" />
+								<h:outputText value="#{customerProduct.selectedViewProduct.productName}" />
+
+								<h:outputText value="Price" />
+								<h:outputText value="$#{customerProduct.selectedViewProduct.price}" />
+								
+								<h:outputText value="Category" />
+								<h:outputText value="#{customerProduct.selectedViewProduct.category.categoryName}" />
+							</p:panelGrid>
+						</p:outputPanel>
+					</p:dialog>  -->
+
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</div>
+	
+	<div id="footer" style="color: black;">Copyright © Capgemini</div>
+</h:body>
+</html>

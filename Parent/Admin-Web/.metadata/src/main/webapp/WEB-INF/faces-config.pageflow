@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14348117124567" configfile="/Admin-Web/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="520" id="pf14355125543420" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14355125543431" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="adminHome.xhtml" x="338" y="520" id="pf14355125543432" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14355125543433 pf14355125543434 pf14355125543435 pf14355125543436 pf14355125543437" inlinks="pf14355125543431" path="/adminHome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" id="pf14355125543438" referenceLink="//@navigationRule.2/@navigationCase.2/@toViewId|" inlinks="pf14355125543433 pf143551255434313 pf143551255434314 pf143551359870536 pf143551413594939" path="login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="adminCategory.xhtml" id="pf143551255434315" referenceLink="//@navigationRule.2/@navigationCase.3/@toViewId|" inlinks="pf14355125543434 pf143551255434318 pf143551255434319 pf143551413594940" path="adminCategory.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="adminProduct.xhtml" id="pf143551255434320" referenceLink="//@navigationRule.2/@navigationCase.3/@toViewId|" inlinks="pf14355125543435 pf143551362638838" path="adminProduct.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewUsers.xhtml" id="pf143551255434323" referenceLink="//@navigationRule.5/@navigationCase.4/@toViewId|" inlinks="pf14355125543436 pf143551446573644" path="viewUsers.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewOrders.xhtml" id="pf143551255434324" referenceLink="//@navigationRule.4/@navigationCase.4/@toViewId|" inlinks="pf14355125543437 pf143551426639243" path="viewOrders.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="adminCategory.xhtml" id="pf143551255434325" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf143551255434326 pf143551255434327 pf143551359870536 pf143551362638838" path="/adminCategory.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="adminProduct.xhtml" id="pf143551255434328" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf143551413594941 pf143551413594942 pf143551413594939 pf143551413594940" inlinks="pf143551255434329 pf143551255434330" path="/adminProduct.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewUsers.xhtml" id="pf143551255434331" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf143551255434329 pf143551255434318 pf143551255434313 pf143551255434332 pf143551426639243" inlinks="pf143551255434326 pf143551413594942" path="/viewUsers.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="adminHome.xhtml" id="pf143551255434333" referenceLink="//@navigationRule.6/@navigationCase.3/@toViewId|" inlinks="pf143551255434332 pf143551255434334" path="adminHome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewOrders.xhtml" id="pf143551255434335" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf143551255434330 pf143551255434319 pf143551255434314 pf143551255434334 pf143551446573644" inlinks="pf143551255434327 pf143551413594941" path="/viewOrders.xhtml"/>
+  <links id="pf14355125543431" target="pf14355125543432" source="pf14355125543420" outcome="admin"/>
+  <links id="pf14355125543433" target="pf14355125543438" source="pf14355125543432" outcome="logout" fromaction="#{memberController.goLogout}"/>
+  <links id="pf14355125543434" target="pf143551255434315" source="pf14355125543432" outcome="page" fromaction="#{memberController.goToCategory}"/>
+  <links id="pf14355125543435" target="pf143551255434320" source="pf14355125543432" outcome="page" fromaction="#{memberController.goToProduct}"/>
+  <links id="pf14355125543436" target="pf143551255434323" source="pf14355125543432" outcome="users"/>
+  <links id="pf14355125543437" target="pf143551255434324" source="pf14355125543432" outcome="orders"/>
+  <links id="pf143551255434329" target="pf143551255434328" source="pf143551255434331" outcome="product"/>
+  <links id="pf143551255434318" target="pf143551255434315" source="pf143551255434331" outcome="category"/>
+  <links id="pf143551255434313" target="pf14355125543438" source="pf143551255434331" outcome="logout"/>
+  <links id="pf143551255434332" target="pf143551255434333" source="pf143551255434331" outcome="home"/>
+  <links id="pf143551255434330" target="pf143551255434328" source="pf143551255434335" outcome="product"/>
+  <links id="pf143551255434319" target="pf143551255434315" source="pf143551255434335" outcome="category"/>
+  <links id="pf143551255434314" target="pf14355125543438" source="pf143551255434335" outcome="logout"/>
+  <links id="pf143551255434334" target="pf143551255434333" source="pf143551255434335" outcome="home"/>
+  <links id="pf143551255434326" target="pf143551255434331" source="pf143551255434325" outcome="users"/>
+  <links id="pf143551255434327" target="pf143551255434335" source="pf143551255434325" outcome="orders"/>
+  <links id="pf143551359870536" target="pf14355125543438" source="pf143551255434325" outcome="logout"/>
+  <links id="pf143551362638838" target="pf143551255434320" source="pf143551255434325" outcome="product"/>
+  <links id="pf143551413594941" target="pf143551255434335" source="pf143551255434328" outcome="orders"/>
+  <links id="pf143551413594942" target="pf143551255434331" source="pf143551255434328" outcome="users"/>
+  <links id="pf143551413594939" target="pf14355125543438" source="pf143551255434328" outcome="logout"/>
+  <links id="pf143551413594940" target="pf143551255434315" source="pf143551255434328" outcome="category"/>
+  <links id="pf143551426639243" target="pf143551255434324" source="pf143551255434331" outcome="orders"/>
+  <links id="pf143551446573644" target="pf143551255434323" source="pf143551255434335" outcome="users"/>
+</pageflow:Pageflow>

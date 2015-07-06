@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="mystyle.css"></link>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:head>
+	<title>Product Management</title>
+</h:head>
+<h:body>
+	<div id="header">
+		<h3>
+			<b>PRODUCT MANAGEMENT CONSOLE</b>
+		</h3>
+	</div>
+	<div id="top"
+		style="background-color: #A9F5F2; border-style: double; width: 100%;">
+		<div style="float: left;">
+			<p:spacer width="20px"></p:spacer>
+			<h:outputText value="WELCOME #{productControl.currentUser}" />
+			<p:spacer width="20px"></p:spacer>
+			<p:clock />
+		</div>
+
+		<div style="float: right;">
+			<h:form id="navigation">
+				<p:commandLink value="CATEGORY"
+					action="#{memberController.goToCategory1}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="USERS" action="#{memberController.goToUsers}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="ORDERS"
+					action="#{memberController.goToOrders}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="LOGOUT" action="#{memberController.goLogout}" />
+				<p:spacer width="20px"></p:spacer>
+			</h:form>
+		</div>
+	</div>
+	<div id="nav"></div>
+	<div id="section">
+		<div>
+			<h:form id="form1">
+				<p:growl id="messages" showDetail="true" />
+				<p:panel header="Add Product" style="width: 400px; height: 400px;">
+					<div>
+						<p:panelGrid columns="2">
+							<h:outputLabel for="productControl.product.productName"
+								value="Product Name: " />
+							<p:inputText value="#{productControl.product.productName}" />
+							<h:outputLabel for="productControl.product.productDesc"
+								value="Product Desc: " />
+							<p:inputText value="#{productControl.product.productDesc}" />
+							<h:outputLabel for="productControl.product.price"
+								value="Product Price: " />
+							<p:inputText value="#{productControl.product.price}" />
+							<h:outputLabel for="productControl.product.productCategory"
+								value="Product Category: " />
+							<p:selectOneMenu value="#{productControl.tempCategory}">
+								<f:selectItem itemLabel="Select Category" itemValue=""
+									noSelectionOption="false" />
+								<f:selectItems value="#{productControl.categoryList}" />
+							</p:selectOneMenu>
+							<f:facet name="footer">
+								<h:commandButton value="Add Product"
+									action="#{productControl.addProduct}" />
+							</f:facet>
+						</p:panelGrid>
+					</div>
+					<div>
+						<p:spacer height="30px;" />
+						<p:dataTable value="#{productControl.productList}" var="o"
+							widgetVar="50" style="width: 300px;" editable="true">
+							<f:facet name="header" style="width: 600px;">  
+                        Product List  
+                    </f:facet>
+							<p:ajax event="rowEdit" listener="#{productControl.onEdit}"
+								update=":form1:messages" />
+							<p:ajax event="rowEditCancel"
+								listener="#{productControl.onCancel}" update=":form1:messages" />
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Product Id" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{o.productId}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{o.productId}" style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Name" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{o.productName}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{o.productName}" style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Price" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{o.price}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{o.price}" style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Options" style="width:50px">
+								<p:rowEditor />
+							</p:column>
+						</p:dataTable>
+					</div>
+				</p:panel>
+			</h:form>
+		</div>
+	</div>
+
+	<div id="footer">Copyright © Capgemini</div>
+</h:body>
+</html>

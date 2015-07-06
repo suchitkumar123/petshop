@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+extraProperties=
+projectKey=org.jboss.tools.examples\:jboss-javaee6-webapp
+serverUrl=http\://localhost\:9000
+version=2

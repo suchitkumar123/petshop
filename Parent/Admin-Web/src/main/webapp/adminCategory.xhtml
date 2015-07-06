@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://richfaces.org/a4j">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="mystyle.css"></link>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:head>
+	<title>Category Management</title>
+</h:head>
+<h:body>
+	<div id="header">
+		<h3>
+			<b>CATEGORY MANAGEMENT CONSOLE</b>
+		</h3>
+	</div>
+	<div id="top"
+		style="background-color: #A9F5F2; border-style: double; width: 100%;">
+		<div style="float: left;">
+			<p:spacer width="20px"></p:spacer>
+			<h:outputText value="WELCOME #{productControl.currentUser}" />
+			<p:spacer width="20px"></p:spacer>
+			<p:clock />
+		</div>
+
+		<div style="float: right;">
+			<h:form id="navigation">
+				<p:commandLink value="PRODUCT"
+					action="#{memberController.goToProduct1}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="USERS" action="#{memberController.goToUsers}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="ORDERS"
+					action="#{memberController.goToOrders}"></p:commandLink>
+				<p:spacer width="20px"></p:spacer>
+				<p:commandLink value="LOGOUT" action="#{memberController.goLogout}" />
+				<p:spacer width="20px"></p:spacer>
+			</h:form>
+		</div>
+	</div>
+	<div id="nav"></div>
+	<div id="section">
+		<h:form id="form1">
+			<p:growl id="messages" showDetail="true" />
+			<p:panel header="Add Category" style="width: 400px;">
+				<p:panelGrid columns="2">
+					<h:outputLabel for="catControl.catName" value="Category Name: " />
+					<p:inputText value="#{catControl.catName}" />
+					<f:facet name="footer">
+						<p:commandButton value="Add Category"
+							actionListener="#{catControl.addCategory()}" update="catList" />
+					</f:facet>
+				</p:panelGrid>
+				<p:spacer height="30px;" />
+				<p:dataTable value="#{catControl.catList}" var="o" widgetVar="50"
+					style="width: 100px;" editable="true" id="catList">
+					<f:facet name="header" style="width: 300px;">  
+                        Category List  
+                    </f:facet>
+					<p:ajax event="rowEdit" listener="#{catControl.onEdit}"
+						update=":form1:messages" />
+					<p:ajax event="rowEditCancel" listener="#{catControl.onCancel}"
+						update=":form1:messages" />
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Category Id" />
+						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{o.categoryId}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{o.categoryId}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Category Name" />
+						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{o.categoryName}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{o.categoryName}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Options" style="width:50px">
+						<p:rowEditor />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</div>
+	<div id="footer">Copyright © Capgemini</div>
+</h:body>
+</html>

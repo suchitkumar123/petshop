@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14348108650240" configfile="/User-Web/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="770" y="1330" id="pf14348109126771" referenceLink="//@navigationRule.6/@navigationCase.3/@toViewId|" outlinks="pf14348109126773 pf143482363711932 pf14352634855110" inlinks="pf14348109126773 pf14354289969561 pf14354289969562 pf14354289969563 pf14354289969564 pf14354289969565" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="userHome.xhtml" x="986" y="946" id="pf14348109126774" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf14348109126775 pf14352634855121 pf14352634855123 pf14352634855124" path="/userHome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="1202" y="2098" id="pf14348109126776" referenceLink="//@navigationRule.11/@navigationCase.1/@toViewId|" inlinks="pf14348109126775 pf14352634855125" path="index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="userRegistration.xhtml" x="986" y="1330" id="pf143481856777026" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf14352634855126" inlinks="pf143482363711932" path="/userRegistration.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="test.xhtml" x="338" y="946" id="pf14352634855127" referenceLink="//@navigationRule.4/@navigationCase.4/@toViewId|" outlinks="pf143526357217414 pf14354289969576 pf14354289969577 pf14354289969561" inlinks="pf14352634855110 pf14354289969578" path="/test.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="userRegistration.xhtml" x="1202" y="1330" id="pf14352634855128" referenceLink="//@navigationRule.11/@navigationCase.0/@toViewId|" inlinks="pf14352634855121" path="userRegistration.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="adminProduct.xhtml" x="1202" y="562" id="pf143526348551210" referenceLink="//@navigationRule.7/@navigationCase.2/@toViewId|" inlinks="pf14352634855123" path="adminProduct.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="userLoginsRegistration.xhtml" x="1202" y="1714" id="pf143526348551211" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf14352634855126" path="userLoginsRegistration.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="userLoginsRegistration.xhtml" x="986" y="2482" id="pf143526348551212" referenceLink="//@navigationRule.9/@fromViewId|" outlinks="pf14352634855125" path="/userLoginsRegistration.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewProduct.xhtml" x="1202" y="946" id="pf143526348551213" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" inlinks="pf14352634855124" path="viewProduct.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="shoppingcart.xhtml" x="554" y="1309" id="pf143526357217415" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" outlinks="pf14354289969579 pf143542899695710 pf143542899695711 pf14354289969562" inlinks="pf143526357217414 pf14354289969579 pf143542899695712 pf143542899695713 pf143542899695714" path="/shoppingcart.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewProfile.xhtml" x="770" y="946" id="pf143542899695716" referenceLink="//@navigationRule.6/@navigationCase.1/@toViewId|" inlinks="pf14354289969576 pf143542899695710 pf143542899695717 pf143542899695718 pf143542899695719" path="/viewProfile.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewHistory.xhtml" x="770" y="1714" id="pf143542899695720" referenceLink="//@navigationRule.6/@navigationCase.2/@toViewId|" inlinks="pf14354289969577 pf143542899695711 pf143542899695721 pf143542899695722 pf143542899695823" path="/viewHistory.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="report.xhtml" x="122" y="1532" id="pf143542899695824" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf143542899695712 pf143542899695717 pf143542899695721 pf14354289969563 pf14354289969578" path="/report.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="profile.xhtml" x="338" y="1330" id="pf143542899695825" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf143542899695713 pf143542899695718 pf143542899695722 pf14354289969564" path="/profile.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="history.xhtml" x="338" y="1756" id="pf143542899695826" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf143542899695714 pf143542899695719 pf143542899695823 pf14354289969565" path="/history.xhtml"/>
+  <links id="pf14348109126775" target="pf14348109126776" source="pf14348109126774" outcome="logout" fromaction="#{customerController.goLogout}"/>
+  <links id="pf143482363711932" target="pf143481856777026" source="pf14348109126771" outcome="page" fromaction="#{customerController.goToRegistration()}"/>
+  <links id="pf14352634855110" target="pf14352634855127" source="pf14348109126771" outcome="user"/>
+  <links id="pf14352634855121" target="pf14352634855128" source="pf14348109126774" outcome="page" fromaction="#{customerController.goToRegistration()}"/>
+  <links id="pf14352634855123" target="pf143526348551210" source="pf14348109126774" outcome="page" fromaction="#{customerController.goLogout}"/>
+  <links id="pf14352634855126" target="pf143526348551211" source="pf143481856777026" outcome="success" fromaction="#{registration.customerRegister}"/>
+  <links id="pf14352634855125" target="pf14348109126776" source="pf143526348551212" outcome="done" fromaction="#{registration.addLogins}"/>
+  <links id="pf14352634855124" target="pf143526348551213" source="pf14348109126774" outcome="view" fromaction="#{customerProduct.goToViewProduct}"/>
+  <links id="pf143526357217414" target="pf143526357217415" source="pf14352634855127" outcome="cart"/>
+  <links id="pf14354289969576" target="pf143542899695716" source="pf14352634855127" outcome="profile"/>
+  <links id="pf14354289969577" target="pf143542899695720" source="pf14352634855127" outcome="history"/>
+  <links id="pf14354289969561" target="pf14348109126771" source="pf14352634855127" outcome="logout"/>
+  <links id="pf143542899695710" target="pf143542899695716" source="pf143526357217415" outcome="profile"/>
+  <links id="pf143542899695711" target="pf143542899695720" source="pf143526357217415" outcome="history"/>
+  <links id="pf14354289969562" target="pf14348109126771" source="pf143526357217415" outcome="logout"/>
+  <links id="pf143542899695712" target="pf143526357217415" source="pf143542899695824" outcome="cart"/>
+  <links id="pf143542899695717" target="pf143542899695716" source="pf143542899695824" outcome="profile"/>
+  <links id="pf143542899695721" target="pf143542899695720" source="pf143542899695824" outcome="history"/>
+  <links id="pf14354289969563" target="pf14348109126771" source="pf143542899695824" outcome="logout"/>
+  <links id="pf14354289969578" target="pf14352634855127" source="pf143542899695824" outcome="home"/>
+  <links id="pf143542899695713" target="pf143526357217415" source="pf143542899695825" outcome="cart"/>
+  <links id="pf143542899695718" target="pf143542899695716" source="pf143542899695825" outcome="profile"/>
+  <links id="pf143542899695722" target="pf143542899695720" source="pf143542899695825" outcome="history"/>
+  <links id="pf14354289969564" target="pf14348109126771" source="pf143542899695825" outcome="logout"/>
+  <links id="pf143542899695714" target="pf143526357217415" source="pf143542899695826" outcome="cart"/>
+  <links id="pf143542899695719" target="pf143542899695716" source="pf143542899695826" outcome="profile"/>
+  <links id="pf143542899695823" target="pf143542899695720" source="pf143542899695826" outcome="history"/>
+  <links id="pf14354289969565" target="pf14348109126771" source="pf143542899695826" outcome="logout"/>
+  <links id="pf14348109126773" target="pf14348109126771" source="pf14348109126771" outcome="notuser">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf14354289969579" target="pf143526357217415" source="pf143526357217415" outcome="cart">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+</pageflow:Pageflow>

@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://richfaces.org/a4j">
+<h:head>
+<style>
+p.uppercase {
+	text-transform: uppercase;
+}
+
+p.italic {
+	font-style: italic;
+}
+</style>
+	<title>Petshop Online</title>
+	<link rel="stylesheet" type="text/css" href="mystyle.css"></link>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body style="background-color: #EEEEEE;">
+	<div id="top">
+		<div style="float: left;">
+			<p:spacer width="20px"></p:spacer>
+			<h:outputText value="WELCOME #{dndProductsView.user}" />
+			<p:spacer width="20px"></p:spacer>
+			<p:clock />
+		</div>
+		<div style="float: right;">
+			<h:form id="navigation">
+			<p:commandLink value="PROFILE"
+				action="#{dndProductsView.viewProfile()}" />
+			<p:spacer width="20px"></p:spacer>
+			<p:commandLink value="HISTORY"
+				action="#{dndProductsView.ordersHistory()}"></p:commandLink>
+			<p:spacer width="20px"></p:spacer>
+			<p:commandLink value="LOGOUT" action="#{dndProductsView.logout()}" />
+			<p:spacer width="20px"></p:spacer>
+		</h:form>
+		</div>
+	</div>
+	<div id="nav">
+		<p class="italic">
+		<h3><h:outputText value="Welcome to the Counter! So here you have all the items you want to purchase. Please select the quantity !" /></h3>
+		</p>
+	</div>
+	<div id="section">
+		<h:form id="shopcart">
+			<p:growl id="msgs" showDetail="true" />
+			<p:dataTable id="cartTable" var="cartItem" value="#{dndProductsView.cartItems}"
+				sortBy="#{cartItems.name}" editable="true">
+				<p:column headerText="Id">
+					<h:outputText value="#{cartItem.cartItemsId}" />
+				</p:column>
+				<p:column headerText="Name">
+					<h:outputText value="#{cartItem.name}" />
+				</p:column>
+				<p:column headerText="Category">
+					<h:outputText value="#{cartItem.categoryName}" />
+				</p:column>
+				<p:column headerText="Price">
+					<h:outputText value="#{cartItem.price}" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:selectOneMenu value="#{cartItem.quantity}">
+					<p:ajax listener="#{dndProductsView.onQuantityChange(cartItem)}" update="cartTable" />
+						<f:selectItem itemValue="1" itemLabel="One" />
+						<f:selectItem itemValue="2" itemLabel="Two" />
+						<f:selectItem itemValue="3" itemLabel="Three" />
+					</h:selectOneMenu>
+				</p:column>
+				<p:column headerText="Options" style="width:50px">
+						<p:rowEditor />
+					</p:column>
+				<p:column>
+                    <p:commandButton icon="ui-icon-trash"
+                        title="Remove"
+                        actionListener="#{dndProductsView.remove(cartItem)}" update="cartTable"/>
+                </p:column>
+				<p:columnGroup type="footer">
+					<p:row>
+						<p:column></p:column>
+						<p:column></p:column>
+						<p:column></p:column>
+						<p:column footerText="Totals: " style="text-align:right" />
+						<p:column footerText="#{dndProductsView.totalPrice}" />
+					</p:row>
+				</p:columnGroup>
+			</p:dataTable>
+		</h:form>
+		<p:spacer height="20px"></p:spacer>
+		<h:form id="form1">
+			<p:growl id="msgs" showDetail="true" />
+			<p:panel header="Add Delivery Address" style="width: 400px;">
+				<p:panelGrid columns="2">
+					<h:outputLabel for="#{dndProductsView.address.lineOne}"
+						value="Address(Line One): " />
+					<p:inputText value="#{dndProductsView.address.lineOne}" />
+					<h:outputLabel for="#{dndProductsView.address.lineTwo}"
+						value="Address(Line Two): " />
+					<p:inputText value="#{dndProductsView.address.lineTwo}" />
+					<h:outputLabel for="#{dndProductsView.address.lineThree}"
+						value="Address(Line Three): " />
+					<p:inputText value="#{dndProductsView.address.lineThree}" />
+					<h:outputLabel for="#{dndProductsView.address.pincode}"
+						value="Pincode: " />
+					<p:inputText value="#{dndProductsView.address.pincode}" />
+					<h:outputLabel for="#{dndProductsView.address.phoneNumber}"
+						value="Phone No: " />
+					<p:inputText value="#{dndProductsView.address.phoneNumber}" />
+					<h:outputLabel for="#{dndProductsView.address.email}"
+						value="Email: " />
+					<p:inputText value="#{dndProductsView.address.email}" />
+					<f:facet name="footer">
+						<h:commandButton value="Add Delivery Address"
+							action="#{dndProductsView.addDeliveryAddress()}"
+							styleClass="ui-priority-primary" />
+					</f:facet>
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
+
+	<div id="footer" style="color: black;">Copyright © Capgemini</div>
+</h:body>
+</html>
