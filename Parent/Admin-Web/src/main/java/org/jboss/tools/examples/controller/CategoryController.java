@@ -19,9 +19,6 @@ import com.capgemini.petshop.business.logics.CategoryLogics;
 public class CategoryController {
 
 	@Inject
-	private Category category;
-
-	@Inject
 	private FacesContext facesContext;
 
 	@Inject

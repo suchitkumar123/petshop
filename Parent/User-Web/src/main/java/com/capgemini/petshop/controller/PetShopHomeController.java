@@ -15,21 +15,23 @@ import com.capgemini.petshop.business.logics.ProductLogics;
 @RequestScoped
 @ManagedBean(name = "homeControl")
 public class PetShopHomeController {
-	
+
 	private List<Category> categorylist;
-	
+
 	@Inject
 	private CategoryLogics categoryLogics;
-	
+
 	@Inject
 	private ProductLogics productLogics;
-	
+
 	private Category category;
-	
+
 	private List<Product> productList;
-	
+
+	private Product selectedProduct;
+
 	@PostConstruct
-	public void init() { 
+	public void init() {
 		categorylist = categoryLogics.findAllOrderedByCategoryName();
 		productList = productLogics.findAllOrderedByProductName();
 	}
@@ -37,7 +39,7 @@ public class PetShopHomeController {
 	public List<Category> getCategorylist() {
 		return categorylist;
 	}
-	
+
 	public List<Product> getProductList() {
 		return productList;
 	}
@@ -47,9 +49,7 @@ public class PetShopHomeController {
 		productList = productLogics.getProductsbyCategoryId(category
 				.getCategoryId());
 	}
-	
-	private Product selectedProduct;
-	
+
 	public Product getSelectedProduct() {
 		return selectedProduct;
 	}
@@ -57,17 +57,17 @@ public class PetShopHomeController {
 	public void setSelectedProduct(Product selectedProduct) {
 		this.selectedProduct = selectedProduct;
 	}
-	
+
 	public String goToRegister() {
 		return "register";
 	}
-	
+
 	public String goToLogin() {
 		return "login";
 	}
-	
+
 	public String goToHome() {
 		return "petShopHome";
 	}
-	
+
 }

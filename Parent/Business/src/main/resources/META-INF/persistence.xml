@@ -26,8 +26,6 @@
       <!-- The datasource is deployed as WEB-INF/jboss-javaee6-webapp-ds.xml, you
          can find it in the source at src/main/webapp/WEB-INF/jboss-javaee6-webapp-ds.xml -->
       <jta-data-source>java:jboss/datasources/myDataSource</jta-data-source>
-      <class>com.capgemini.petshop.business.entities.Admin</class>
-      <class>com.capgemini.petshop.business.util.Util</class>
       <properties>
          <!-- Properties for Hibernate -->
          <property name="hibernate.hbm2ddl.auto" value="update" />

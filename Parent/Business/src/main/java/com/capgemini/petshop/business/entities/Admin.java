@@ -27,14 +27,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-//import org.hibernate.validator.constraints.Email;
-//import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
-@XmlRootElement
 @Table(name = "ADMIN", uniqueConstraints = @UniqueConstraint(columnNames = "adminId"))
 public class Admin implements Serializable {
 
@@ -50,6 +45,18 @@ public class Admin implements Serializable {
 	@NotNull
 	@Size(min = 1, max = 25)
 	private String password;
+	
+	private static final int PRIME = 31;
+
+	public Admin(String userName, String password) {
+		super();
+		this.userName = userName;
+		this.password = password;
+	}
+
+	public Admin() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getUserName() {
 		return userName;
@@ -67,19 +74,9 @@ public class Admin implements Serializable {
 		this.password = password;
 	}
 
-	public Admin(String userName, String password) {
-		super();
-		this.userName = userName;
-		this.password = password;
-	}
-
-	public Admin() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = 1;
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
@@ -90,23 +87,19 @@ public class Admin implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Admin other = (Admin) obj;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
+		if (password == null && other.password != null) {
 			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
-			return false;
+		}
 		return true;
 	}
 

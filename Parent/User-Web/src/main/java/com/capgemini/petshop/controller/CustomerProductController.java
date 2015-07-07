@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -12,12 +11,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.primefaces.component.tabview.Tab;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
-import org.primefaces.model.StreamedContent;
-
 import com.capgemini.petshop.business.entities.Category;
 import com.capgemini.petshop.business.entities.Product;
 import com.capgemini.petshop.business.logics.CategoryLogics;
@@ -35,6 +30,28 @@ public class CustomerProductController {
 
 	private String username;
 
+	private static final String USERNAME = "username";
+
+	@Inject
+	private ProductLogics productLogics;
+
+	@Inject
+	private CategoryLogics categoryLogics;
+
+	private List<Product> productList;
+
+	private int tempcatId;
+
+	private String t;
+
+	private Category temproryCatId;
+
+	private List<Product> productsPerCategory;
+
+	private Product selectedViewProduct;
+
+	private List<Category> categoryList;
+
 	public Product getProduct() {
 		return product;
 	}
@@ -48,13 +65,10 @@ public class CustomerProductController {
 	}
 
 	@PostConstruct
-	public void setUsername(String username) {
+	public void setUsername() {
 		HttpSession session = SessionBean.getSession();
-		username = (String) session.getAttribute("username");
+		username = (String) session.getAttribute(USERNAME);
 	}
-
-	@Inject
-	private ProductLogics productLogics;
 
 	public ProductLogics getProductLogics() {
 		return productLogics;
@@ -64,9 +78,6 @@ public class CustomerProductController {
 		this.productLogics = productLogics;
 	}
 
-	@Inject
-	private CategoryLogics categoryLogics;
-
 	public CategoryLogics getCategoryLogics() {
 		return categoryLogics;
 	}
@@ -75,25 +86,15 @@ public class CustomerProductController {
 		this.categoryLogics = categoryLogics;
 	}
 
-	private List<Product> productList;
-
 	public List<Product> getProductList() {
 		productList = productLogics.findAllOrderedByProductName();
 		return productList;
 	}
 
-	private List<Category> categoryList;
-
 	public List<Category> getCategoryList() {
 		categoryList = categoryLogics.findAllOrderedByCategoryName();
 		return categoryList;
 	}
-
-	private int tempcatId;
-
-	private String t;
-
-	private Category temproryCatId;
 
 	public Category getTemproryCatId() {
 		return temproryCatId;
@@ -125,15 +126,11 @@ public class CustomerProductController {
 		this.tempcatId = tempcatId;
 	}
 
-	private List<Product> productsPerCategory;
-
 	public void util(Category category) {
 		tempcatId = category.getCategoryId();
 	}
 
 	public List<Product> getProductsPerCategory() {
-		// productsPerCategory =
-		// productLogics.getProductsbyCategoryId(tempcatId);
 		productsPerCategory = productLogics.findAllOrderedByProductName();
 		return productsPerCategory;
 	}
@@ -142,7 +139,7 @@ public class CustomerProductController {
 		this.productsPerCategory = productsPerCategory;
 	}
 
-	public void setCategoryList(List<Category> categoryList) {
+	public void setCategoryList() {
 		categoryList = categoryLogics.findAllOrderedByCategoryName();
 	}
 
@@ -153,8 +150,6 @@ public class CustomerProductController {
 	public String goToViewProduct() {
 		return "view";
 	}
-
-	private Product selectedViewProduct;
 
 	public Product getSelectedViewProduct() {
 		return selectedViewProduct;
@@ -168,8 +163,6 @@ public class CustomerProductController {
 		FacesMessage msg = new FacesMessage("Tab Changed", "Active Tab: "
 				+ event.getTab().getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		System.out.println(""+this.temproryCatId.getCategoryName());
-		System.out.println(""+this.temproryCatId.getCategoryName());
 	}
 
 	public void onTabClose(TabCloseEvent event) {

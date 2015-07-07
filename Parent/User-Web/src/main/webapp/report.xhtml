@@ -41,6 +41,8 @@
 		<hr />
 		<h:outputText value="Order Date: #{dndProductsView.order.orderDate}" />
 		<hr />
+		<h:outputText value="#{dndProductsView.currentAddress}" />
+		<hr />
 		<p:dataTable var="i" value="#{dndProductsView.cartItems}">
 			<p:column headerText="Name">
 				<h:outputText value="#{i.name}" />

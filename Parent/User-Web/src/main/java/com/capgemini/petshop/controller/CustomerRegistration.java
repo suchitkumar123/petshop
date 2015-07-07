@@ -1,7 +1,6 @@
 package com.capgemini.petshop.controller;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.bean.ManagedBean;
@@ -19,10 +18,6 @@ import com.capgemini.petshop.business.logics.LoginsLogics;
 @SessionScoped
 @ManagedBean(name = "registration")
 public class CustomerRegistration {
-
-	@Inject
-	@RequestScoped
-	private FacesContext facesContext;
 
 	@Produces
 	@Named

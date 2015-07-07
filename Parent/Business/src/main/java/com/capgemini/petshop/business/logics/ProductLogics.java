@@ -21,6 +21,9 @@ public class ProductLogics {
 
 	private List<String> categoryNames;
 
+	@Inject
+	private CategoryLogics catLogics;
+
 	public List<String> getCategoryNames() {
 		return categoryNames;
 	}
@@ -28,9 +31,6 @@ public class ProductLogics {
 	public void setCategoryNames(List<String> categoryNames) {
 		this.categoryNames = categoryNames;
 	}
-	
-	@Inject
-	private CategoryLogics catLogics;
 
 	public Product findById(Long productId) {
 		return em.find(Product.class, productId);
@@ -65,7 +65,7 @@ public class ProductLogics {
 		}
 		return categoryNames;
 	}
-	
+
 	public List<Product> getProductsbyCategoryId(int catId) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Product> criteria = cb.createQuery(Product.class);
@@ -74,11 +74,10 @@ public class ProductLogics {
 		criteria.select(product).where(
 				cb.equal(product.get("productCategory"), cat));
 		return em.createQuery(criteria).getResultList();
-		
+
 	}
 
 	public void addProduct(Product product) {
-		//em.persist(product);
 		em.merge(product);
 	}
 

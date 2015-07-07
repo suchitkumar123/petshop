@@ -11,7 +11,6 @@ import javax.inject.Inject;
 
 import org.primefaces.event.RowEditEvent;
 
-import com.capgemini.petshop.business.entities.Category;
 import com.capgemini.petshop.business.entities.Product;
 import com.capgemini.petshop.business.logics.CategoryLogics;
 import com.capgemini.petshop.business.logics.ProductLogics;
@@ -23,14 +22,6 @@ public class ProductController {
 	@Inject
 	private Product product;
 
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	@Inject
 	private ProductLogics productLogics;
 
@@ -39,7 +30,7 @@ public class ProductController {
 
 	@Inject
 	private CategoryLogics catLogics;
-
+	
 	private List<Product> productList;
 
 	private List<String> categoryList;
@@ -62,6 +53,14 @@ public class ProductController {
 		}
 	}
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 	public String getCurrentUser() {
 		return currentUser;
 	}

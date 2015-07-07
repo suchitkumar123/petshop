@@ -1,26 +1,20 @@
 package com.capgemini.petshop.business.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @SuppressWarnings("serial")
 @Entity
-@XmlRootElement
 @Table(name = "CUSTOMERS", uniqueConstraints = @UniqueConstraint(columnNames = "customersId"))
 public class Customers implements Serializable {
 
@@ -61,6 +55,28 @@ public class Customers implements Serializable {
 
 	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
 	private Logins login;
+
+	private static final int PRIME = 31;
+
+	public Customers() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Customers(String firstName, String lastName, String address1,
+			String address2, String address3, int postcode, String email,
+			long phoneNumber, int registered, Logins login) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.address3 = address3;
+		this.postcode = postcode;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.registered = registered;
+		this.login = login;
+	}
 
 	public Logins getLogin() {
 		return login;
@@ -150,29 +166,9 @@ public class Customers implements Serializable {
 		this.registered = registered;
 	}
 
-	public Customers(String firstName, String lastName, String address1,
-			String address2, String address3, int postcode, String email,
-			long phoneNumber, int registered, Logins login) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.address3 = address3;
-		this.postcode = postcode;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.registered = registered;
-		this.login = login;
-	}
-
-	public Customers() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = 1;
 		result = prime * result
 				+ ((address1 == null) ? 0 : address1.hashCode());
@@ -186,7 +182,8 @@ public class Customers implements Serializable {
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + (int) (phoneNumber ^ (phoneNumber >>> 32));
+		result = prime * result
+				+ (int) (phoneNumber ^ (phoneNumber >>> PRIME + 1));
 		result = prime * result + postcode;
 		result = prime * result + registered;
 		return result;
@@ -194,54 +191,15 @@ public class Customers implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		Customers other = (Customers) obj;
-		if (address1 == null) {
-			if (other.address1 != null)
-				return false;
-		} else if (!address1.equals(other.address1))
-			return false;
-		if (address2 == null) {
-			if (other.address2 != null)
-				return false;
-		} else if (!address2.equals(other.address2))
-			return false;
-		if (address3 == null) {
-			if (other.address3 != null)
-				return false;
-		} else if (!address3.equals(other.address3))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (phoneNumber != other.phoneNumber)
-			return false;
-		if (postcode != other.postcode)
-			return false;
-		if (registered != other.registered)
-			return false;
+		}
 		return true;
 	}
 

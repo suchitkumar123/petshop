@@ -22,16 +22,13 @@ import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
-import com.capgemini.petshop.business.entities.Admin;
 import com.capgemini.petshop.business.entities.Customers;
 import com.capgemini.petshop.business.entities.Logins;
-import com.capgemini.petshop.business.logics.AdminLogics;
 import com.capgemini.petshop.business.logics.LoginsLogics;
 
 @Model
@@ -52,6 +49,8 @@ public class CustomerController {
 
 	@Inject
 	private LoginsLogics loginsLogics;
+
+	private static final String LOGOUT = "logout";
 
 	@PostConstruct
 	public void initAdmin() {
@@ -78,24 +77,17 @@ public class CustomerController {
 		return "page";
 	}
 
-	public String validateLogin() throws Exception {
+	public String validateLogin() {
 		try {
 			boolean check = loginsLogics.loginValidation(logins.getUsername(),
 					logins.getPassword());
 			if (check) {
-				System.out.println("LOGIN SUCCESSFUL!!");
 				HttpSession session = SessionBean.getSession();
 				session.setAttribute("username", logins.getUsername());
 				return "user";
 			} else {
-				System.out.println("LOGIN UNSUCCESSFUL!!");
 				return "notuser";
 			}
-			// memberRegistration.register(newMember);
-			// FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,
-			// "Registered!", "Registration successful");
-			// facesContext.addMessage(null, m);
-			// initNewMember();
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -109,38 +101,28 @@ public class CustomerController {
 		try {
 			HttpSession session = SessionBean.getSession();
 			session.setAttribute("username", null);
-			return "logout";
+			return LOGOUT;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Login unsuccessful");
 			facesContext.addMessage(null, m);
 		}
-		return "logout";
+		return LOGOUT;
 	}
 
 	private String getRootErrorMessage(Exception e) {
-		// Default to general error message that registration failed.
 		String errorMessage = "Login failed. See server log for more information";
 		if (e == null) {
-			// This shouldn't happen, but return the default messages
 			return errorMessage;
 		}
 
-		// Start with the exception and recurse to find the root cause
 		Throwable t = e;
 		while (t != null) {
-			// Get the message from the Throwable class instance
 			errorMessage = t.getLocalizedMessage();
 			t = t.getCause();
 		}
-		// This is the root cause message
 		return errorMessage;
-	}
-
-	@SuppressWarnings("unused")
-	private String logoutAdmin() {
-		return "logout";
 	}
 
 }

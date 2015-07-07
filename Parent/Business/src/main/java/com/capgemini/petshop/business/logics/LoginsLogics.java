@@ -10,7 +10,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.capgemini.petshop.business.entities.Customers;
 import com.capgemini.petshop.business.entities.Logins;
 
 @Stateless
@@ -21,15 +20,18 @@ public class LoginsLogics {
 
 	@Inject
 	private Event<Logins> loginsEventSrc;
+	
+	private static final String USERNAME = "username";
+	
+	private static final String PASSWORD = "password";
 
-	public boolean findCustomers(Logins login) throws Exception {
-		// log.info("Validating Login " + admin.getUserName());
+	public boolean findCustomers(Logins login) {
 		@SuppressWarnings("unchecked")
 		List<Logins> loginList = em
 				.createQuery(
 						"from Logins L where L.username = :username and L.password = :password ")
-				.setParameter("username", login.getUsername())
-				.setParameter("password", login.getPassword()).getResultList();
+				.setParameter(USERNAME, login.getUsername())
+				.setParameter(PASSWORD, login.getPassword()).getResultList();
 		if (loginList != null) {
 			return true;
 		}
@@ -41,10 +43,10 @@ public class LoginsLogics {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Logins> criteria = cb.createQuery(Logins.class);
 		Root<Logins> login = criteria.from(Logins.class);
-		criteria.select(login).where(cb.equal(login.get("username"), userName),
-				cb.equal(login.get("password"), password));
+		criteria.select(login).where(cb.equal(login.get(USERNAME), userName),
+				cb.equal(login.get(PASSWORD), password));
 		List<Logins> loginTempList = em.createQuery(criteria).getResultList();
-		if (loginTempList.size() > 0) {
+		if (!loginTempList.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -60,7 +62,7 @@ public class LoginsLogics {
 		CriteriaQuery<Logins> criteria = cb.createQuery(Logins.class);
 		Root<Logins> logins = criteria.from(Logins.class);
 		criteria.select(logins).where(
-				cb.equal(logins.get("username"), username));
+				cb.equal(logins.get(USERNAME), username));
 		return em.createQuery(criteria).getSingleResult();
 	}
 

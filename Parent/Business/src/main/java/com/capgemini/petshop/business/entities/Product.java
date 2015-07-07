@@ -1,8 +1,6 @@
 package com.capgemini.petshop.business.entities;
 
 import java.io.Serializable;
-import java.util.Arrays;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,11 +14,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @SuppressWarnings("serial")
 @Entity
-@XmlRootElement
 @Table(name = "PRODUCT", uniqueConstraints = @UniqueConstraint(columnNames = "productId"))
 public class Product implements Serializable {
 
@@ -46,6 +42,22 @@ public class Product implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Category productCategory;
 
+	private static final int PRIME = 31;
+
+	public Product(String productName, String productDesc, double price,
+			byte[] image, Category productCategory) {
+		super();
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.image = image;
+		this.price = price;
+		this.productCategory = productCategory;
+	}
+
+	public Product() {
+
+	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -66,17 +78,19 @@ public class Product implements Serializable {
 		return productCategory;
 	}
 
-	public void setProductCategory(Category category) {
+	public void setProductCategory() {
 		if (this.productCategory != null) {
 			this.productCategory.getProducts().add(this);
 		}
 	}
 
-	
-	 public byte[] getImage() { return image; }
-	
-	 public void setImage(byte[] image) { this.image = image; }
-	
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
 	public double getPrice() {
 		return price;
@@ -98,27 +112,13 @@ public class Product implements Serializable {
 		this.productCategory = productCategory;
 	}
 
-	public Product(String productName, String productDesc, double price,
-		byte[] image,Category productCategory) {
-		super();
-		this.productName = productName;
-		this.productDesc = productDesc;
-		this.image = image;
-		this.price = price;
-		this.productCategory = productCategory;
-	}
-
-	public Product() {
-
-	}
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = 1;
 		long temp;
 		temp = Double.doubleToLongBits(price);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + (int) (temp ^ (temp >>> PRIME + 1));
 		result = prime * result
 				+ ((productCategory == null) ? 0 : productCategory.hashCode());
 		result = prime * result
@@ -130,31 +130,19 @@ public class Product implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Product other = (Product) obj;
-		if (Double.doubleToLongBits(price) != Double
-				.doubleToLongBits(other.price))
+		if (!productName.equals(other.productName)) {
 			return false;
-		if (productCategory == null) {
-			if (other.productCategory != null)
-				return false;
-		} else if (!productCategory.equals(other.productCategory))
-			return false;
-		if (productDesc == null) {
-			if (other.productDesc != null)
-				return false;
-		} else if (!productDesc.equals(other.productDesc))
-			return false;
-		if (productName == null) {
-			if (other.productName != null)
-				return false;
-		} else if (!productName.equals(other.productName))
-			return false;
+		}
 		return true;
 	}
 

@@ -62,14 +62,6 @@ p.italic {
 				<p:column headerText="Price">
 					<h:outputText value="#{cartItem.price}" />
 				</p:column>
-				<p:column headerText="Quantity">
-					<h:selectOneMenu value="#{cartItem.quantity}">
-					<p:ajax listener="#{dndProductsView.onQuantityChange(cartItem)}" update="cartTable" />
-						<f:selectItem itemValue="1" itemLabel="One" />
-						<f:selectItem itemValue="2" itemLabel="Two" />
-						<f:selectItem itemValue="3" itemLabel="Three" />
-					</h:selectOneMenu>
-				</p:column>
 				<p:column headerText="Options" style="width:50px">
 						<p:rowEditor />
 					</p:column>

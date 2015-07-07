@@ -22,14 +22,12 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import com.capgemini.petshop.business.entities.Admin;
-import com.capgemini.petshop.business.entities.CartItems;
 import com.capgemini.petshop.business.entities.Customers;
 import com.capgemini.petshop.business.entities.Orders;
 import com.capgemini.petshop.business.logics.AdminLogics;
@@ -48,10 +46,18 @@ public class MemberController {
 
 	@Inject
 	private AdminLogics adminLogics;
+	
+	@Inject
+	private CustomersLogics custLogics;
+	
+	@Inject
+	private OrdersLogics orderLogic;
 
 	@Produces
 	@Named
 	private Admin admin;
+	
+	private static final String LOGOUT = "logout";
 
 	private List<Customers> userList;
 
@@ -90,9 +96,6 @@ public class MemberController {
 
 	/********************** VIEW USERS *************************/
 
-	@Inject
-	private CustomersLogics custLogics;
-
 	public List<Customers> getUserList() {
 		return userList;
 	}
@@ -107,11 +110,7 @@ public class MemberController {
 	}
 
 	/*********************************************************/
-	/*************VIEW ORDERS*********************************/
-	
-	@Inject
-	private OrdersLogics orderLogic;
-	
+	/*************VIEW ORDERS*********************************/	
 	
 	public List<Orders> getOrderList() {
 		return orderList;
@@ -128,20 +127,18 @@ public class MemberController {
 
 	/*********************************************************/
 
-	public String validateLogin() throws Exception {
+	public String validateLogin() {
 		try {
 			boolean check = adminLogics.loginValidation(admin.getUserName(),
 					admin.getPassword());
 			if (check) {
-				System.out.println("LOGIN SUCCESSFUL!!");
 				HttpSession session = SessionBean.getSession();
 				session.setAttribute("username", admin.getUserName());
 				return "admin";
 			} else {
-				System.out.println("LOGIN UNSUCCESSFUL!!");
 				return "notadmin";
 			}
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Login unsuccessful");
@@ -154,14 +151,14 @@ public class MemberController {
 		try {
 			HttpSession session = SessionBean.getSession();
 			session.setAttribute("username", null);
-			return "logout";
+			return LOGOUT;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Login unsuccessful");
 			facesContext.addMessage(null, m);
 		}
-		return "logout";
+		return LOGOUT;
 	}
 
 	private String getRootErrorMessage(Exception e) {
@@ -181,11 +178,6 @@ public class MemberController {
 		}
 		// This is the root cause message
 		return errorMessage;
-	}
-
-	@SuppressWarnings("unused")
-	private String logoutAdmin() {
-		return "logout";
 	}
 
 }

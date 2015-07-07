@@ -5,25 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.primefaces.component.tabview.Tab;
-import org.primefaces.component.tabview.TabView;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.event.TabChangeEvent;
-
 import com.capgemini.petshop.business.entities.CartItems;
 import com.capgemini.petshop.business.entities.Category;
 import com.capgemini.petshop.business.entities.Customers;
@@ -58,10 +50,42 @@ public class MainController {
 
 	private List<Category> categorylist;
 
+	private Category category;
+
+	private List<CartItems> cartItems;
+
+	private double total;
+
+	private double totalPrice = 0.0;
+
+	private int quantity;
+
+	@Inject
+	private DeliveryAddress address;
+
+	@Inject
+	CustomersLogics custLogics;
+
+	@Inject
+	DeliveryAddressLogics delAddLogics;
+
+	@Inject
+	private CartItemsLogics cartItemsLogic;
+
 	@Inject
 	private CategoryLogics categoryLogics;
 
 	private String user;
+
+	private String currentAddress;
+
+	private int orderId;
+
+	@Inject
+	private Orders order;
+
+	@Inject
+	private OrdersLogics orderLogics;
 
 	@PostConstruct
 	public void init() {
@@ -69,6 +93,7 @@ public class MainController {
 		categorylist = categoryLogics.findAllOrderedByCategoryName();
 		productList = productLogics.findAllOrderedByProductName();
 		droppedProducts = new ArrayList<Product>();
+		cartItems = null;
 	}
 
 	public void onProductDrop(DragDropEvent ddEvent) {
@@ -182,8 +207,6 @@ public class MainController {
 
 	/****************** Category Tabs Control ***********************/
 
-	private Category category;
-
 	public List<Category> getCategorylist() {
 		return categorylist;
 	}
@@ -202,13 +225,7 @@ public class MainController {
 
 	/****************** Shopping Cart Controller ***********************/
 
-	private List<CartItems> cartItems;
-
-	@Inject
-	private CartItemsLogics cartItemsLogic;
-
 	public String addToCart() {
-		// cartItemsLogic.removeAllCartItem();
 		this.boughtProduct = this.droppedProducts;
 		for (Product p : boughtProduct) {
 			CartItems c = new CartItems();
@@ -237,18 +254,12 @@ public class MainController {
 		this.cartItems = cartItems;
 	}
 
-	private double total;
-
 	public double getTotal() {
 		for (Product p : boughtProduct) {
 			total = total + p.getPrice();
 		}
 		return total;
 	}
-
-	private double totalPrice = 0.0;
-
-	private int quantity;
 
 	public int getQuantity() {
 		return quantity;
@@ -278,12 +289,6 @@ public class MainController {
 			totalPrice = totalPrice + (cIt.getPrice() * cIt.getQuantity());
 		}
 	}
-	
-	public void onValueChanged(ValueChangeEvent e) {
-		CartItems c = (CartItems) e.getSource();
-		System.out.println(c.getCategoryName()+"");
-	}
-	
 
 	public CartItemsLogics getCartItemsLogic() {
 		return cartItemsLogic;
@@ -299,15 +304,6 @@ public class MainController {
 
 	/****************************************************************/
 	/******************** Place the Order *****************************/
-
-	@Inject
-	private DeliveryAddress address;
-
-	@Inject
-	CustomersLogics custLogics;
-
-	@Inject
-	DeliveryAddressLogics delAddLogics;
 
 	public DeliveryAddress getAddress() {
 		return address;
@@ -330,34 +326,28 @@ public class MainController {
 		this.order.setOrderDate(orderDate);
 		orderLogics.addOrders(this.order);
 		cartItemsLogic.removeAllCartItem();
+		this.currentAddress = this.address.toString();
+		delAddLogics.removeAllDeliveryAddress();
 		backToShoppingMenu();
-		orderId = this.order.getOrdersId();
+		orderId = orderLogics.highestOrderId();
 		return "report";
 
 	}
-	
-	private int orderId;
-	
+
 	public int getOrderId() {
 		return orderId;
 	}
-	
+
 	public void backToShoppingMenu() {
-		for(Product p : droppedProducts) {
+		for (Product p : droppedProducts) {
 			productList.add(p);
 			droppedProducts.remove(p);
 		}
-		
+
 	}
 
 	/****************************************************************/
 	/******************* Report ******************************/
-
-	@Inject
-	private Orders order;
-
-	@Inject
-	private OrdersLogics orderLogics;
 
 	public Orders getOrder() {
 		return order;
@@ -365,6 +355,14 @@ public class MainController {
 
 	public void setOrder(Orders order) {
 		this.order = order;
+	}
+
+	public String getCurrentAddress() {
+		return this.currentAddress;
+	}
+
+	public void setCurrentAddress(String currentAddress) {
+		this.currentAddress = currentAddress;
 	}
 
 	/****************************************************************/

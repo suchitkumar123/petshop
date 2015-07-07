@@ -16,6 +16,8 @@ public class CategoryLogics {
 
 	@Inject
 	private EntityManager em;
+	
+	private static final String CATEGORYNAME = "categoryName";
 
 	public Category findById(int categoryId) {
 		return em.find(Category.class, categoryId);
@@ -26,7 +28,7 @@ public class CategoryLogics {
 		CriteriaQuery<Category> criteria = cb.createQuery(Category.class);
 		Root<Category> category = criteria.from(Category.class);
 		criteria.select(category).where(
-				cb.equal(category.get("categoryName"), categoryName));
+				cb.equal(category.get(CATEGORYNAME), categoryName));
 		return em.createQuery(criteria).getSingleResult();
 	}
 
@@ -35,7 +37,7 @@ public class CategoryLogics {
 		CriteriaQuery<Category> criteria = cb.createQuery(Category.class);
 		Root<Category> category = criteria.from(Category.class);
 		criteria.select(category).where(
-				cb.equal(category.get("categoryName"), categoryName));
+				cb.equal(category.get(CATEGORYNAME), categoryName));
 		Category c = em.createQuery(criteria).getSingleResult();
 		if (c != null) {
 			return c.getCategoryId();
@@ -47,7 +49,7 @@ public class CategoryLogics {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Category> criteria = cb.createQuery(Category.class);
 		Root<Category> category = criteria.from(Category.class);
-		criteria.select(category).orderBy(cb.asc(category.get("categoryName")));
+		criteria.select(category).orderBy(cb.asc(category.get(CATEGORYNAME)));
 		return em.createQuery(criteria).getResultList();
 	}
 

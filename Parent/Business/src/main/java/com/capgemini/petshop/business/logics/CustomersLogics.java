@@ -3,15 +3,12 @@ package com.capgemini.petshop.business.logics;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.capgemini.petshop.business.entities.Admin;
-import com.capgemini.petshop.business.entities.Category;
 import com.capgemini.petshop.business.entities.Customers;
 import com.capgemini.petshop.business.entities.Logins;
 
@@ -20,9 +17,6 @@ public class CustomersLogics {
 	
 	@Inject
     private EntityManager em;
-
-    @Inject
-    private Event<Customers> customersEventSrc;
     
     @Inject
     LoginsLogics loginsLogics;

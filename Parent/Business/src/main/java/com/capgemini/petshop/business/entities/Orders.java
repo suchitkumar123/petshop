@@ -2,19 +2,13 @@ package com.capgemini.petshop.business.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
@@ -34,6 +28,21 @@ public class Orders implements Serializable {
 	private List<CartItems> cartItems = new ArrayList<CartItems>();
 
 	private int customersId;
+	
+	private static final int PRIME = 31;
+
+	public Orders() {
+
+	}
+
+	public Orders(String status, String orderDate, List<CartItems> cartItems,
+			int customersId) {
+		super();
+		this.status = status;
+		this.orderDate = orderDate;
+		this.cartItems = cartItems;
+		this.customersId = customersId;
+	}
 
 	public int getCustomersId() {
 		return customersId;
@@ -75,22 +84,9 @@ public class Orders implements Serializable {
 		this.cartItems = cartItems;
 	}
 
-	public Orders() {
-
-	}
-
-	public Orders(String status, String orderDate, List<CartItems> cartItems,
-			int customersId) {
-		super();
-		this.status = status;
-		this.orderDate = orderDate;
-		this.cartItems = cartItems;
-		this.customersId = customersId;
-	}
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = 1;
 		result = prime * result
 				+ ((cartItems == null) ? 0 : cartItems.hashCode());
@@ -103,30 +99,19 @@ public class Orders implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Orders other = (Orders) obj;
-		if (cartItems == null) {
-			if (other.cartItems != null)
-				return false;
-		} else if (!cartItems.equals(other.cartItems))
+		if (cartItems == null && other.cartItems != null) {
 			return false;
-		if (customersId != other.customersId)
-			return false;
-		if (orderDate == null) {
-			if (other.orderDate != null)
-				return false;
-		} else if (!orderDate.equals(other.orderDate))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
+		}
 		return true;
 	}
 
